@@ -3,7 +3,7 @@
 }
 
 #bar-footer-message-box {
-  height: initial;  
+  height: initial;
 }
 
 #bar-footer-message-box .list {
@@ -19,5 +19,34 @@
 }
 
 .item-message-body {
-  padding: 4px 20px; 
+  padding: 4px 20px;
 }
+
+.bar.bar-uptalk {
+  background-color: #9aa1fe;
+  border-color: #1aaac3;
+  background-image: linear-gradient(0deg, #1aaac3, #1aaac3 50%, transparent 50%);
+  color: white; }
+  .bar.bar-uptalk .title {
+    color: white; }
+
+.bar-uptalk .button {
+  color: white;
+  background-color: #9aa1fe;
+  border-color: #1aaac3; }
+  .bar-uptalk .button:hover {
+    color: white;
+    text-decoration: none; }
+  .bar-uptalk .button.active, .bar-uptalk .button:active {
+    background-color: #1aaac3;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15);
+    border-color: #1aaac3; }
+  .bar-uptalk .button.button-clear {
+    color: white;
+    background: none;
+    border-color: transparent;
+    box-shadow: none;
+    font-size: 18px; }
+  .bar-uptalk .button.button-icon {
+    background: none;
+    border-color: transparent; }
