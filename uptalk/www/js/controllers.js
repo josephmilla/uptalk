@@ -298,16 +298,88 @@ mouseout : function(d) {
   //     $scope.$broadcast('scroll.refreshComplete');
   //   }, 500);
   // };
-})
 
+})
 
 .controller('ChatbotCtrl', function($scope) {
 
-  // $scope.onRefresh = function() {
-  //   var stop = $timeout(function() {
-  //     $scope.$broadcast('scroll.refreshComplete');
-  //   }, 500);
-  // };
+  $scope.submitAddMessage = function() {
+    $scope.messages.push({
+      created_by: this.username,
+      content: this.newMessage,
+      created_at: new Date()
+    });
+    this.newMessage = "";
+  };
+
+  $scope.onRefresh = function() {
+    var stop = $timeout(function() {
+      $scope.$broadcast('scroll.refreshComplete');
+    }, 500);
+  };
+
+
+  /* Chatbot */
+
+  var bot = {
+  	baseLang : "en-US",
+  	baseUrl : "http://www.botlibre.com/rest/botlibre/form-chat?instance=165&application=8821025394976658259&message=",
+
+  	getUrl : function(query) {
+  		var url = this.baseUrl + query;
+  		return url;
+  	},
+
+  	getMessage : function(xml) {
+  		var cut1 = xml.substr(0, xml.lastIndexOf("</message>"));
+  		var cut2 = cut1.substr(cut1.lastIndexOf("<message>") + "<message>".length);
+  		return cut2;
+  	},
+
+  	fetch : function(query, fn) {
+  		var url = this.getUrl(query);
+  		callUrl(url, true, fn);
+  	},
+  };
+
+  var go = {
+  	responses : [],
+    scope     : null,
+
+  	beginChain : function(message, scope) {
+      go.scope = scope;
+  		go.sendChatBotRequest(message);
+  	},
+
+  	sendChatBotRequest : function(text) {
+  		bot.fetch(text, go.handleChatReceive);
+  	},
+
+  	handleChatReceive : function(res) {
+  		var text = bot.getMessage(res);
+  		if (text == "Hi Anonymous") text = "Hey! How are you?";
+  		go.responses.push(text);
+      go.scope.messages.push({
+        created_by : "UpTalk",
+        content    : text,
+        created_at : new Date()
+      });
+  	},
+  };
+
+  $scope.newMessage = "";
+  $scope.messages = [];
+
+  $scope.username = 'User' + Math.floor(Math.random() * 501);
+  $scope.submitAddMessage = function() {
+    $scope.messages.push({
+      created_by : this.username,
+      content    : this.newMessage,
+      created_at : new Date()
+    });
+    this.newMessage = "";
+  };
+
 })
 
 

@@ -9,9 +9,9 @@
     <h1 class="title">Chatbot</h1>
   </header>
 
-  <!-- <content has-header="true" padding="true">
+  <content has-header="true" padding="true">
     <h3>Chatbot</h3>
-  </content> -->
+  </content>
 
   <content
     has-header="true"
@@ -30,17 +30,18 @@
     <div ng-repeat="message in messages" type="item-text-wrap">
       <div ng-class-odd="'card item-message'" ng-class-even="'card item-reply'">
 
-			<div class="item-message-header">
-			  <div class="row nopads">
-				<small class="col">{{message.created_by}}:</small>
-				<small class="col text-right">{{message.created_at | date: 'short' }}</small>
-			  </div>
-			</div>
-			<div class="item-message-body item-text-wrap">
-			  {{message.content}}
-			
-		</div>
+  			<div class="item-message-header">
+  			  <div class="row nopads">
+    				<small class="col">{{message.created_by}}:</small>
+    				<small class="col text-right">{{message.created_at | date: 'short' }}</small>
+  			  </div>
+  			</div>
+
+  			<div class="item-message-body item-text-wrap">
+  			  {{message.content}}
+    		</div>
       </div>
+    </div>
   </content>
 
   <div class="bar bar-footer bar-stable" id="bar-footer-message-box">
