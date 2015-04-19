@@ -189,7 +189,7 @@ app.post('/api/messages/create', function(req, res){
       res.status(400).send("Unknown Error");
       return;
     }
-    res.status(200).send("Sucess");
+    res.status(200).send("Success");
   })
 });
 
@@ -202,6 +202,14 @@ app.get('/api/messages/random', function(req, res){
   console.log("Random");
   var num = history.length;
   var selected = Math.floor(Math.random() * num);
+  var hist = history[selected];
+  res.send(hist);
+});
+
+app.get('/api/messages/specific/:n', function(req, res){
+  console.log("Specific");
+  var selected = req.params.n;
+  console.log(selected);
   var hist = history[selected];
   res.send(hist);
 });

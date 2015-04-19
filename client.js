@@ -30,6 +30,7 @@ function parseHist(res) {
 }
 
 function addResponse(message) {
+	message.trim()
 	responses.push(message);
 	drawResponse();
 	if (responses.length >= 4) {
@@ -57,7 +58,8 @@ function sendResponses() {
 }
 
 function wordStats() {
-	var giantWord = responsesHistory.
+	var giantWord = responsesHistory.join(' ');
+	for (var i=0; i<
 }
 
 function sendResponsesHandler(res) {
