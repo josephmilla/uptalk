@@ -13,6 +13,7 @@ angular.module('chatRoom.controllers', [])
 
   $scope.goToHome = function() {
     $location.path('/home');
+    $scope.toggleSideMenu();
   };
 
   $scope.toggleSideMenu = function() {
