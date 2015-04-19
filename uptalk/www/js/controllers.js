@@ -363,7 +363,8 @@ mouseout : function(d) {
       var req = new XMLHttpRequest();
       console.log(url);
       req.open("GET", url, true);
-      if (arguments.length == 3) {
+	  console.log(arguments);
+      if (arguments.length) {
         req.onreadystatechange = function () {
           console.log(req.readyState + ": " + req.responseText);
           if (req.readyState == 4) {
@@ -375,7 +376,9 @@ mouseout : function(d) {
       try {
         req.send();
       }
-      catch(e) {}
+      catch(e) {
+	    console.log(e);
+	  }
     },
   };
 
@@ -420,7 +423,7 @@ mouseout : function(d) {
       created_at : new Date()
     });
 
-    setTimeout(function(){ go.beginChain(msg, $scope); }, 1000);
+    setTimeout(function(){ go.beginChain(msg, $scope); }, 10);
 
     console.log(this.newMessage);
     this.newMessage = "";
