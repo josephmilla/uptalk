@@ -20,6 +20,11 @@ angular.module('chatRoom.controllers', [])
     $scope.toggleSideMenu();
   };
 
+  $scope.goToChatbot = function() {
+    $location.path('/chatbot');
+    $scope.toggleSideMenu();
+  };
+
   $scope.goToChallenge = function() {
     $location.path('/challenge');
     $scope.toggleSideMenu();
@@ -40,7 +45,12 @@ angular.module('chatRoom.controllers', [])
     {
       'id' : '0000001',
       'title' : 'Room1',
-      'description' : 'This is Room1'
+      'description' : 'This is Room1',
+      'messages' : {
+        'username' : 'user1',
+        'content' : 'This is a content',
+        'date' : '1429426288'
+      }
     },
     {
       'id' : '0000002',
@@ -101,7 +111,7 @@ angular.module('chatRoom.controllers', [])
       'description' : 'This is Room5'
     },
   ];
-  
+
   // $scope.rooms = [];
   // var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
   // var promise = angularFire(ref, $scope, "rooms");
@@ -154,6 +164,15 @@ angular.module('chatRoom.controllers', [])
       $scope.$broadcast('scroll.refreshComplete');
     }, 500);
   };
+})
+
+.controller('ChatbotCtrl', function($scope) {
+
+  // $scope.onRefresh = function() {
+  //   var stop = $timeout(function() {
+  //     $scope.$broadcast('scroll.refreshComplete');
+  //   }, 500);
+  // };
 })
 
 .controller('ChallengeCtrl', function($scope) {

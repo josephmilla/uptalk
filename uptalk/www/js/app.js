@@ -20,6 +20,11 @@ angular.module('chatRoom', ['ionic', 'ngRoute', 'ngAnimate', 'chatRoom.services'
     controller: 'RoomCtrl'
   });
 
+  $routeProvider.when('/chatbot', {
+    templateUrl: 'templates/chatbot.html',
+    controller: 'ChatbotCtrl'
+  });
+
   $routeProvider.when('/challenge', {
     templateUrl: 'templates/challenge.html',
     controller: 'ChallengeCtrl'
