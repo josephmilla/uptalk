@@ -5,25 +5,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bodyParser = require('body-parser');
 
-var history = [
-	{
-		"original" : ["Hey!",       , "I'm great. Thanks for asking!", "I do, but eat it rarely. What kind do you like?"],
-		"real"     : ["How are you?", "Do you like candy?"           , "My favorite is Laffy Laffy."],
-		"1"        : ["Fake"        , "Fake"                         , "Fake"],
-		"2"        : ["Even Faker"  , "More Fake"                    , "Fakeish"],
-	},{
-		"original" : ["Two!",       , "I'm great. Two for asking!"   , "I do, but two it rarely. What kind do you like?"],
-		"real"     : ["Two are you?", "Do you like two?",            , "My favorite is Two Two."],
-		"1"        : ["Fake"        , "Fake"                         , "Fake"],
-		"2"        : ["Even Faker"  , "More Fake"                    , "Fakeish"],
-	},{
-		"original" : ["Extra!",     , "I'm great. Extra for asking!" , "I do, but eat extra rarely. What kind do you like?"],
-		"real"     : ["Extra you?"  , "Do you like extra?",          , "My favorite is Extra Extra."],
-		"1"        : ["Fake"        , "Fake"                         , "Fake"],
-		"2"        : ["Even Faker"  , "More Fake"                    , "Fakeish"],
-	},
-];
-
 app.set('port', process.env.PORT || '5000');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -47,13 +28,10 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-// mongoose.connect("");//azure/aws mongodb address??!!!
+mongoose.connect("");//azure/aws mongodb address??!!!
 
 //mongoose.connect("localhost");
 
-// var size = new Schema({
-  // userid: {type: Integer, required: true},
-// }, {versionKey: false});
 
 
 var userSchema = new Schema({
@@ -81,50 +59,11 @@ var messageSchema = new Schema({
   seen: {type:Boolean, default: false}
 }, {versionKey: false});
 
-var messageHistorySchema = new Schema({
-  original: {type: Array, required: true},
-  chatroomid: {type: String, required: true},
-  date: {type: Date, required: true},
-  text: {type: String, required: true},
-  seen: {type:Boolean, default: false}
-}, {versionKey: false});
-
-var allMessageHistorySchema = new Schema({
-  histid: {type: Array, required: true},
-  chatroomid: {type: String, required: true},
-  date: {type: Date, required: true},
-  text: {type: String, required: true},
-  seen: {type:Boolean, default: false}
-}, {versionKey: false});
 
 
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema
 var ChatRoom = mongoose.model('ChatRoom', chatRoomSchema);
 var Message = mongoose.model('Message', messageSchema);
-var MessageHistory = mongoose.model('MessageHistory', messageHistorySchema);
-
-app.post('/api/users/get', function(req, res){
-  var postID = req.body.userID;
-  User.findOne({userid: postID}, function(err, user){
-    if (err || user == null){
-      res.status(400).send("Unknown Error");
-      return;
-    }
-    res.status(200).send(user);
-  });
-});
-
-app.post('/api/users/update', function(req, res){
-  var postID = req.body.userID;
-  User.update({userid: postID}, {}, function(err, numUpdated){
-    if (err){
-      console.log(err);
-      res.status(400).send("Fail");
-      return;
-    }
-    res.status(200).send("Success");
-  });
-});
 
 app.post('/api/users/new', function(req, res){
   var postID = req.body.userID;
@@ -151,6 +90,29 @@ app.post('/api/users/new', function(req, res){
   })
 });
 
+app.post('/api/users/get', function(req, res){
+  var postID = req.body.userID;
+  User.findOne({userid: postID}, function(err, user){
+    if (err || user == null){
+      res.status(400).send("Unknown Error");
+      return;
+    }
+    res.status(200).send(user);
+  });
+});
+
+app.post('/api/users/update', function(req, res){
+  var postID = req.body.userID;
+  User.update({userid: postID}, {}, function(err, numUpdated){
+    if (err){
+      console.log(err);
+      res.status(400).send("Fail");
+      return;
+    }
+    res.status(200).send("Success");
+  });
+});
+
 app.post('/api/messages/new', function(req, res){
   var postID = req.body.chatRoomId;
   var postUserId = req.body.userID;
@@ -170,46 +132,6 @@ app.post('/api/messages/new', function(req, res){
     }
     res.status(200).send("Sucess");
   })
-});
-
-app.post('/api/messages/create', function(req, res){
-  var postID = req.body.chatRoomId;
-  var postUserId = req.body.userID;
-  var postDate = req.body.date;
-  var postText = req.body.text;
-
-  var newMessage = new Message({
-    chatroomid: postID,
-    userid: postUserId,
-    date: postDate,
-    text: postText
-  });
-  newMessage.save(function(err, nU){
-    if(err){
-      res.status(400).send("Unknown Error");
-      return;
-    }
-    res.status(200).send("Sucess");
-  })
-});
-
-/****
-/
-/ Write Here
-/
- ****/
-app.get('/api/messages/random', function(req, res){
-  console.log("Random");
-  var num = history.length;
-  var selected = Math.floor(Math.random() * num);
-  var hist = history[selected];
-  res.send(hist);
-});
-
-app.post('/api/messages/submit', function(req, res){
-  console.log("Submit:");
-  console.log(JSON.stringify(req));
-  res.send(hist);
 });
 
 app.post('/api/messages/all', function(req, res){
@@ -238,6 +160,8 @@ app.post('/api/messages/all', function(req, res){
 app.post('/api/messages/lastMessage', function(req, res){
   var postID = req.body.chatRoomId;
 
+
+
   Message.aggregate([
       {$match: {chatroomid: {$eq: postID}}},
       {$sort: {text: 1}},
@@ -259,7 +183,8 @@ app.post('/api/messages/lastMessage', function(req, res){
       }
     console.log(messages);
       res.status(200).send(messages);
-  });
+  })
+
 });
 
 app.post('/api/messages/notseen', function(req, res){
@@ -283,7 +208,7 @@ app.post('/api/messages/notseen', function(req, res){
       }
     console.log(messages);
       res.status(200).send(messages);
-  });
+  })
 });
 
 app.post('/api/messages/seen', function(req, res){
@@ -298,6 +223,8 @@ app.post('/api/messages/seen', function(req, res){
     res.status(200).send("Success");
   });
 });
+
+
 
 app.post('/api/chatrooms/new', function(req, res){
   var postID = req.body.chatRoomId;
@@ -318,7 +245,7 @@ app.post('/api/chatrooms/new', function(req, res){
       res.status(400).send("Unknown Error");
       return;
     }
-    res.status(200).send("Success");
+    res.status(200).send("Sucess");
   })
 });
 
@@ -357,4 +284,7 @@ app.post('/api/chatrooms/getUserChatrooms', function(req, res){
   })
 });
 
+
+
 app.listen(app.get('port'));
+
