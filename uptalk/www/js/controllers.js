@@ -37,7 +37,7 @@ angular.module('chatRoom.controllers', [])
 
 .controller('MainCtrl', function($scope, $timeout, angularFire) {
   $scope.rooms = [];
-  var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
+  var ref = new Firebase('https://yo4mv38loui.firebaseio-demo.com/');//new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
   var promise = angularFire(ref, $scope, "rooms");
 
   $scope.onRefresh = function() {
@@ -49,7 +49,7 @@ angular.module('chatRoom.controllers', [])
 
 .controller('NewRoomCtrl', function($scope, $location, angularFire) {
   $scope.rooms = [];
-  var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
+  var ref = new Firebase('https://yo4mv38loui.firebaseio-demo.com/');//new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
   var promise = angularFire(ref, $scope, "rooms");
 
   $scope.newRoomName = "";
@@ -82,7 +82,7 @@ angular.module('chatRoom.controllers', [])
   $scope.newMessage = "";
   $scope.messages = [];
 
-  var ref = new Firebase('https://chatroom-io.firebaseio.com/rooms/' + $routeParams.roomId);
+  var ref = new Firebase('https://yo4mv38loui.firebaseio-demo.com/');//new Firebase('https://chatroom-io.firebaseio.com/rooms/' + $routeParams.roomId);
   var promise = angularFire(ref, $scope, "messages");
 
   $scope.username = 'User' + Math.floor(Math.random() * 501);
@@ -113,6 +113,60 @@ angular.module('chatRoom.controllers', [])
 
 .controller('StatisticsCtrl', function($scope) {
 
+$scope.chartConfig = {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'Breakdown of grammartical issues'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Grammartical issue share',
+            data: [
+                ['Spelling',   12.0],
+                ['Word choice',       26.8],
+                {
+                    name: 'Sentence fragments',
+                    y: 45.8,
+                    sliced: true,
+                    selected: true
+                },
+                ['Pronoun Reference',    8.5],
+                ['Comma Splices',     6.2],
+                ['Others',   0.7]
+            ]
+        }]
+    }
+
+/**click : function(d) {
+  $scope.messages.push('clicked!');
+},
+mouseover : function(d) {
+  $scope.messages.push('mouseover!');
+},
+mouseout : function(d) {
+  $scope.messages.push('mouseout!');
+}**/
+
   // $scope.onRefresh = function() {
   //   var stop = $timeout(function() {
   //     $scope.$broadcast('scroll.refreshComplete');
@@ -127,4 +181,120 @@ angular.module('chatRoom.controllers', [])
   //     $scope.$broadcast('scroll.refreshComplete');
   //   }, 500);
   // };
+})
+
+
+
+.controller('ChatStats1Ctrl', function($scope) {
+      
+$scope.chartConfig = {
+        options: {
+            chart: {
+                type: 'bar'
+            }
+        },
+        series: [{
+            data: [['Hello', 10],['Thank you', 15], ['Ok', 12], ['Great!' , 8], ['Awesome', 7]]
+        }],
+        title: {
+            text: 'Non conjuntive word most frequently used'
+        },
+
+        loading: false
+    }
+  // $scope.onRefresh = function() {
+  //   var stop = $timeout(function() {
+  //     $scope.$broadcast('scroll.refreshComplete');
+  //   }, 500);
+  // };
+})
+
+
+
+
+.controller('ChatStats2Ctrl', function($scope) {
+
+$scope.chartConfig = {
+        options: {
+            chart: {
+                type: 'bar'
+            }
+        },
+        series: [{
+            data: [10, 15, 12, 8, 7]
+        }],
+        title: {
+            text: 'Hello'
+        },
+
+        loading: false
+    }
+
+     $scope.chartConfig2 = {
+         options: {
+            chart: {
+                type: 'areaspline'
+            }
+        },
+        title: {
+            text: 'Average correct answers during one week'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 150,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        xAxis: {
+            categories: [
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+                'Sunday'
+            ],
+            plotBands: [{ // visualize the weekend
+                from: 4.5,
+                to: 6.5,
+                color: 'rgba(68, 170, 213, .2)'
+            }]
+        },
+        yAxis: {
+            title: {
+                text: 'Number of correct answers'
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.5
+            }
+        },
+        series: [{
+            name: 'John',
+            data: [3, 4, 3, 5, 4, 10, 12]
+        }, {
+            name: 'Jane',
+            data: [1, 3, 4, 3, 3, 5, 4]
+        }]
+    }
+
+  // $scope.onRefresh = function() {
+  //   var stop = $timeout(function() {
+  //     $scope.$broadcast('scroll.refreshComplete');
+  //   }, 500);
+  // };
 });
+

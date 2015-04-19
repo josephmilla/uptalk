@@ -8,8 +8,14 @@
     <button class="button button-icon" ng-click="goToStatistics()"><i class="icon ion-navicon"></i></button>
     <h1 class="title">Statistics</h1>
   </header>
+  <ion-content has-header="true">
+  <br/> <br/>
+  <h3> Summary: </h3>
+ <br/> <br/> 
+                           <highchart id="chart1" config="chartConfig" class="span10"></highchart>
 
-  <content has-header="true" padding="true">
-    <h3>Statistics</h3>
-  </content>
+<a class="button icon icon-right ion-chevron-right" href="#/chatstats1">Tabs Nav Stack</a> <br/>
+<a class="button icon icon-right ion-chevron-right" href="#/chatstats2">Tabs Nav Stack</a>
+
+    </ion-content>
 </nav-page>
