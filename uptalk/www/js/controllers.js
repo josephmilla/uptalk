@@ -176,7 +176,28 @@ angular.module('chatRoom.controllers', [])
 })
 
 .controller('ChallengeCtrl', function($scope) {
-
+	
+	
+	$scope.newMessage = "";
+	$scope.messages = [];
+	$scope.username = 'User' + Math.floor(Math.random() * 501);
+	
+	
+    $scope.messages.push({
+      created_by: "mrBean",
+      content: "Do you like unicorns?",
+      created_at: new Date()
+    });
+	
+	$scope.messages.push({
+      created_by: "mrHat",
+      content: "Yes, but don't tell anyone",
+      created_at: new Date()
+    });
+  
+	
+	
+	
   // $scope.onRefresh = function() {
   //   var stop = $timeout(function() {
   //     $scope.$broadcast('scroll.refreshComplete');

@@ -11,15 +11,28 @@
 }
 
 .item-message {
-  background-color: #DEF;
+  background-color: #DDEEFE;
+  width: 70%;
+  margin: 6px 10px;
+  padding: 0px;
 }
 
+.nopads{
+	padding:0px;
+}
 .item-message-header {
   font-style: italic;
 }
 
 .item-message-body {
   padding: 4px 20px;
+  font-size: 16px;
+}
+.item-reply{
+   margin: 6px 10px;
+   float: right;
+   width: 70%;
+   background-color: #B6DEA5;
 }
 
 .bar.bar-uptalk {
@@ -77,3 +90,12 @@ color: #9aa1fe; }
 background-color: #9aa1fe;
 color: #fff;
 box-shadow: none; }
+
+.odd{
+	background-color: blue;
+	width: 50%;
+}
+.even{
+	background-color: red;
+
+}

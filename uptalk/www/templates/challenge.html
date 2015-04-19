@@ -10,6 +10,21 @@
   </header>
 
   <content has-header="true" padding="true">
-    <h3>Challenge</h3>
+    
+	<div ng-repeat="message in messages" type="item-text-wrap">
+      <div ng-class-odd="'card item-message'" ng-class-even="'card item-reply'">
+
+			<div class="item-message-header">
+			  <div class="row nopads">
+				<small class="col">{{message.created_by}}:</small>
+				<small class="col text-right">{{message.created_at | date: 'short' }}</small>
+			  </div>
+			</div>
+			<div class="item-message-body item-text-wrap">
+			  {{message.content}}
+			
+		</div>
+      </div>
+	
   </content>
 </nav-page>
