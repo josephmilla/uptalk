@@ -341,36 +341,63 @@ mouseout : function(d) {
 
   	getUrl : function(query) {
   		var url = this.baseUrl + query;
+      console.log(url);
   		return url;
   	},
 
   	getMessage : function(xml) {
+      console.log(xml);
   		var cut1 = xml.substr(0, xml.lastIndexOf("</message>"));
   		var cut2 = cut1.substr(cut1.lastIndexOf("<message>") + "<message>".length);
   		return cut2;
   	},
 
-  	fetch : function(query, fn) {
-  		var url = this.getUrl(query);
-  		callUrl(url, true, fn);
-  	},
+    fetch : function(query, fn) {
+      var url = bot.getUrl(query);
+
+      console.log(url);
+      bot.callUrl(url, fn);
+    },
+
+    callUrl : function(url, fn) {
+      var req = new XMLHttpRequest();
+      console.log(url);
+      req.open("GET", url, true);
+      if (arguments.length == 3) {
+        req.onreadystatechange = function () {
+          console.log(req.readyState + ": " + req.responseText);
+          if (req.readyState == 4) {
+            console.log("Fails");
+            go.handleChatReceive(req.responseText);
+          }
+        }
+      }
+      try {
+        req.send();
+      }
+      catch(e) {}
+    },
   };
 
   var go = {
   	responses : [],
-    scope     : null,
 
   	beginChain : function(message, scope) {
       go.scope = scope;
+      console.log(scope);
   		go.sendChatBotRequest(message);
   	},
 
   	sendChatBotRequest : function(text) {
+      console.log("Before");
   		bot.fetch(text, go.handleChatReceive);
+      console.log("After");
   	},
 
   	handleChatReceive : function(res) {
+      console.log(res);
   		var text = bot.getMessage(res);
+      console.log(text);
   		if (text == "Hi Anonymous") text = "Hey! How are you?";
   		go.responses.push(text);
       go.scope.messages.push({
@@ -386,11 +413,16 @@ mouseout : function(d) {
 
   $scope.username = 'User' + Math.floor(Math.random() * 501);
   $scope.submitAddMessage = function() {
+    var msg = this.newMessage;
     $scope.messages.push({
       created_by : this.username,
-      content    : this.newMessage,
+      content    : msg,
       created_at : new Date()
     });
+
+    setTimeout(function(){ go.beginChain(msg, $scope); }, 1000);
+
+    console.log(this.newMessage);
     this.newMessage = "";
   };
 

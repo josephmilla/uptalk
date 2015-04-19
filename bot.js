@@ -15,12 +15,31 @@ var bot = {
 
 	fetch : function(query, fn) {
 		var url = this.getUrl(query);
-		callUrl(url, true, fn);
+		bot.callUrl(url, fn);
+	},
+
+	callUrl : function(url, fn) {
+		url = endpoint + url;
+		var req = new XMLHttpRequest();
+			req.open("GET", url, true);
+		if (arguments.length == 3) {
+			req.onreadystatechange = function () {
+				if (req.readyState == 4) {
+					fn(req.responseText);
+				}
+			}
+		}
+		try {
+			req.send();
+		}
+		catch(e) {}
 	},
 };
 
 var go = {
 	responses : [],
+
+
 
 	beginChain : function(message) {
 		go.sendChatBotRequest(message);
