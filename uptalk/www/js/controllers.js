@@ -20,6 +20,11 @@ angular.module('chatRoom.controllers', [])
     $scope.toggleSideMenu();
   };
 
+  $scope.goToChallenge = function() {
+    $location.path('/challenge');
+    $scope.toggleSideMenu();
+  };
+
   $scope.goToStatistics = function() {
     $location.path('/statistics');
     $scope.toggleSideMenu();
@@ -95,6 +100,15 @@ angular.module('chatRoom.controllers', [])
       $scope.$broadcast('scroll.refreshComplete');
     }, 500);
   };
+})
+
+.controller('ChallengeCtrl', function($scope) {
+
+  // $scope.onRefresh = function() {
+  //   var stop = $timeout(function() {
+  //     $scope.$broadcast('scroll.refreshComplete');
+  //   }, 500);
+  // };
 })
 
 .controller('StatisticsCtrl', function($scope) {
