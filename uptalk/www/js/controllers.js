@@ -20,11 +20,6 @@ angular.module('chatRoom.controllers', [])
     $scope.toggleSideMenu();
   };
 
-  $scope.goToChatbot = function() {
-    $location.path('/chatbot');
-    $scope.toggleSideMenu();
-  };
-
   $scope.goToChallenge = function() {
     $location.path('/challenge');
     $scope.toggleSideMenu();
@@ -41,46 +36,9 @@ angular.module('chatRoom.controllers', [])
 })
 
 .controller('MainCtrl', function($scope, $timeout, angularFire) {
-<<<<<<< HEAD
   $scope.rooms = [];
-  var ref = new Firebase('https://yo4mv38loui.firebaseio-demo.com/');//new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
+  var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
   var promise = angularFire(ref, $scope, "rooms");
-=======
-  $scope.rooms = [
-    {
-      'id' : '0000001',
-      'title' : 'Room1',
-      'description' : 'This is Room1',
-      'messages' : {
-        'username' : 'user1',
-        'content' : 'This is a content',
-        'date' : '1429426288'
-      }
-    },
-    {
-      'id' : '0000002',
-      'title' : 'Room1',
-      'description' : 'This is Room2'
-    },
-    {
-      'id' : '0000003',
-      'title' : 'Room1',
-      'description' : 'This is Room3'
-    },
-    {
-      'id' : '0000004',
-      'title' : 'Room1',
-      'description' : 'This is Room4'
-    },
-    {
-      'id' : '0000005',
-      'title' : 'Room1',
-      'description' : 'This is Room5'
-    },
-  ];
-  // var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
-  // var promise = angularFire(ref, $scope, "rooms");
->>>>>>> deb86b554572e714fb0a7c6b695343692432290f
 
   $scope.onRefresh = function() {
     var stop = $timeout(function() {
@@ -90,43 +48,9 @@ angular.module('chatRoom.controllers', [])
 })
 
 .controller('NewRoomCtrl', function($scope, $location, angularFire) {
-<<<<<<< HEAD
   $scope.rooms = [];
-  var ref = new Firebase('https://yo4mv38loui.firebaseio-demo.com/');//new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
+  var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
   var promise = angularFire(ref, $scope, "rooms");
-=======
-  $scope.rooms = [
-    {
-      'id' : '0000001',
-      'title' : 'Room1',
-      'description' : 'This is Room1'
-    },
-    {
-      'id' : '0000002',
-      'title' : 'Room1',
-      'description' : 'This is Room2'
-    },
-    {
-      'id' : '0000003',
-      'title' : 'Room1',
-      'description' : 'This is Room3'
-    },
-    {
-      'id' : '0000004',
-      'title' : 'Room1',
-      'description' : 'This is Room4'
-    },
-    {
-      'id' : '0000005',
-      'title' : 'Room1',
-      'description' : 'This is Room5'
-    },
-  ];
-
-  // $scope.rooms = [];
-  // var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
-  // var promise = angularFire(ref, $scope, "rooms");
->>>>>>> deb86b554572e714fb0a7c6b695343692432290f
 
   $scope.newRoomName = "";
   $scope.newRoomNameId = "";
@@ -158,7 +82,7 @@ angular.module('chatRoom.controllers', [])
   $scope.newMessage = "";
   $scope.messages = [];
 
-  var ref = new Firebase('https://yo4mv38loui.firebaseio-demo.com/');//new Firebase('https://chatroom-io.firebaseio.com/rooms/' + $routeParams.roomId);
+  var ref = new Firebase('https://chatroom-io.firebaseio.com/rooms/' + $routeParams.roomId);
   var promise = angularFire(ref, $scope, "messages");
 
   $scope.username = 'User' + Math.floor(Math.random() * 501);
@@ -178,38 +102,8 @@ angular.module('chatRoom.controllers', [])
   };
 })
 
-.controller('ChatbotCtrl', function($scope) {
-
-  // $scope.onRefresh = function() {
-  //   var stop = $timeout(function() {
-  //     $scope.$broadcast('scroll.refreshComplete');
-  //   }, 500);
-  // };
-})
-
 .controller('ChallengeCtrl', function($scope) {
-	
-	
-	$scope.newMessage = "";
-	$scope.messages = [];
-	$scope.username = 'User' + Math.floor(Math.random() * 501);
-	
-	
-    $scope.messages.push({
-      created_by: "mrBean",
-      content: "Do you like unicorns?",
-      created_at: new Date()
-    });
-	
-	$scope.messages.push({
-      created_by: "mrHat",
-      content: "Yes, but don't tell anyone",
-      created_at: new Date()
-    });
-  
-	
-	
-	
+
   // $scope.onRefresh = function() {
   //   var stop = $timeout(function() {
   //     $scope.$broadcast('scroll.refreshComplete');
