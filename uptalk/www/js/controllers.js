@@ -165,7 +165,11 @@ angular.module('chatRoom.controllers', [])
 
 })
 
-.controller('StatisticsCtrl', function($scope) {
+.controller('StatisticsCtrl', function($scope, $routeParams, angularFire) {
+
+
+$scope.prevStat = function () {
+  // body...
 
 $scope.chartConfig = {
         chart: {
@@ -210,6 +214,94 @@ $scope.chartConfig = {
             ]
         }]
     }
+}
+
+$scope.nextStat = function () {
+
+$scope.chartConfig = {
+        options: {
+            chart: {
+                type: 'bar'
+            }
+        },
+        series: [{
+            data: [10, 15, 12, 8, 7]
+        }],
+        title: {
+            text: 'Hello'
+        },
+
+        loading: false
+    }
+}
+$scope.currStat = function () {
+$scope.chartConfig = {
+         options: {
+            chart: {
+                type: 'areaspline'
+            }
+        },
+        title: {
+            text: 'Average correct answers during one week'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 150,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        xAxis: {
+            categories: [
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+                'Sunday'
+            ],
+            plotBands: [{ // visualize the weekend
+                from: 4.5,
+                to: 6.5,
+                color: 'rgba(68, 170, 213, .2)'
+            }]
+        },
+        yAxis: {
+            title: {
+                text: 'Number of correct answers'
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' units'
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.5
+            }
+        },
+        series: [{
+            name: 'John',
+            data: [3, 4, 3, 5, 4, 10, 12]
+        }, {
+            name: 'Jane',
+            data: [1, 3, 4, 3, 3, 5, 4]
+        }]
+    }
+
+}
+
+$scope.currStat();
+
+
+     
 
 /**click : function(d) {
   $scope.messages.push('clicked!');
