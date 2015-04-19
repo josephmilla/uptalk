@@ -8,12 +8,13 @@
     <button class="button button-icon" ng-click="goToChallenge()"><i class="icon ion-navicon"></i></button>
     <h1 class="title">Challenge</h1>
   </header>
-
+  
+    
+<a ng-click="submitAns()">
   <content has-header="true" padding="true">
     
 	<div ng-repeat="message in messages" type="item-text-wrap">
       <div ng-class-odd="'card item-message'" ng-class-even="'card item-reply'">
-
 			<div class="item-message-header">
 			  <div class="row nopads">
 				<small class="col">{{message.created_by}}:</small>
@@ -25,6 +26,11 @@
 			
 		</div>
       </div>
-	
+	</div>
   </content>
+ 
+  <div class="overlay" id="resultScreen">
+	
+  </div>
+   </a>
 </nav-page>

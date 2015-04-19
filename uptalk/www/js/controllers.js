@@ -103,12 +103,61 @@ angular.module('chatRoom.controllers', [])
 })
 
 .controller('ChallengeCtrl', function($scope) {
+	$scope.baseArray = new Array("Do you like unicorns?","Don't tell me Santa Claus doesn't exist","Don't tell her. He is my boyfriend too!","I think it's the big belly. Everyone seems to want one.");
+	$scope.replyArrays= new Array(new Array("How can you like things that don't exist? So No.","Ok, I tell your sister's boyfriend to tell you.","Ah, damn Santa Claus is a such a player","It also serves as a floatation device in case of an emergency"),new Array("Who doesn't like unicorns?","Santa doesn't exist, the tooth fairy doesn't exist, and the dinosaurs are dead. Time to face the hard facts.","You have been known to get around","So chubby chasers like to come after you eh?"), new Array("Yes, but don't tell anyone","He is still real in my heart","Who isn't dating him?","A little extra cushion for the pushing"));	
+	$scope.right = 0;
+	$scope.cur=0;
+	$scope.newMessage = "";
+	$scope.messages = [];
+	$scope.username = 'User' + Math.floor(Math.random() * 501);
+	
+	for(var i=0; i<$scope.baseArray.length; i++){
+		 $scope.messages.push({
+			created_by: "mrBean",
+			content: $scope.baseArray[i],
+			created_at: new Date()
+		});
+		
+		$scope.messages.push({
+		   created_by: "mrHat",
+		   content: $scope.replyArrays[$scope.cur][i],
+		   created_at: new Date()
+		});
+	}
+	
+	$scope.nextConvo = function() {
+		$scope.cur++;
+		if($scope.cur>2){
+			$scope.cur=0;
+		}
+		$scope.messages = [];
+		for(var i=0; i<$scope.baseArray.length; i++){
+			 $scope.messages.push({
+				created_by: "mrBean",
+				content: $scope.baseArray[i],
+				created_at: new Date()
+			});
+			
+			$scope.messages.push({
+			   created_by: "mrHat",
+			   content: $scope.replyArrays[$scope.cur][i],
+			   created_at: new Date()
+			});
+		}
+	};
+   
+	$scope.submitAns = function() {
+		var correct = false;
+		if(correct){
+			document.getElementById("resultScreen").style.background="rgba(0,112,51,0.7)";
+			document.getElementById("resultScreen").innerHTML = "<div class='res-text'>CORRECT</div>";
+		}else{
+			document.getElementById("resultScreen").style.background="rgba(112,5,5,0.7)";
+			document.getElementById("resultScreen").innerHTML = "<div class='res-text'>WRONG</div>";
 
-  // $scope.onRefresh = function() {
-  //   var stop = $timeout(function() {
-  //     $scope.$broadcast('scroll.refreshComplete');
-  //   }, 500);
-  // };
+		}
+	}
+
 })
 
 .controller('StatisticsCtrl', function($scope) {
