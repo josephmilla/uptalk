@@ -36,9 +36,35 @@ angular.module('chatRoom.controllers', [])
 })
 
 .controller('MainCtrl', function($scope, $timeout, angularFire) {
-  $scope.rooms = [];
-  var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
-  var promise = angularFire(ref, $scope, "rooms");
+  $scope.rooms = [
+    {
+      'id' : '0000001',
+      'title' : 'Room1',
+      'description' : 'This is Room1'
+    },
+    {
+      'id' : '0000002',
+      'title' : 'Room1',
+      'description' : 'This is Room2'
+    },
+    {
+      'id' : '0000003',
+      'title' : 'Room1',
+      'description' : 'This is Room3'
+    },
+    {
+      'id' : '0000004',
+      'title' : 'Room1',
+      'description' : 'This is Room4'
+    },
+    {
+      'id' : '0000005',
+      'title' : 'Room1',
+      'description' : 'This is Room5'
+    },
+  ];
+  // var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
+  // var promise = angularFire(ref, $scope, "rooms");
 
   $scope.onRefresh = function() {
     var stop = $timeout(function() {
@@ -48,9 +74,37 @@ angular.module('chatRoom.controllers', [])
 })
 
 .controller('NewRoomCtrl', function($scope, $location, angularFire) {
-  $scope.rooms = [];
-  var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
-  var promise = angularFire(ref, $scope, "rooms");
+  $scope.rooms = [
+    {
+      'id' : '0000001',
+      'title' : 'Room1',
+      'description' : 'This is Room1'
+    },
+    {
+      'id' : '0000002',
+      'title' : 'Room1',
+      'description' : 'This is Room2'
+    },
+    {
+      'id' : '0000003',
+      'title' : 'Room1',
+      'description' : 'This is Room3'
+    },
+    {
+      'id' : '0000004',
+      'title' : 'Room1',
+      'description' : 'This is Room4'
+    },
+    {
+      'id' : '0000005',
+      'title' : 'Room1',
+      'description' : 'This is Room5'
+    },
+  ];
+  
+  // $scope.rooms = [];
+  // var ref = new Firebase('https://chatroom-io.firebaseio.com/opened_rooms');
+  // var promise = angularFire(ref, $scope, "rooms");
 
   $scope.newRoomName = "";
   $scope.newRoomNameId = "";
