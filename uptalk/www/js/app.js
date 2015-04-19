@@ -9,26 +9,30 @@ angular.module('chatRoom', ['ionic', 'ngRoute', 'ngAnimate', 'chatRoom.services'
     templateUrl: 'templates/home.html',
     controller: 'MainCtrl'
   });
-  
+
   $routeProvider.when('/rooms/new', {
     templateUrl: 'templates/new_room.html',
     controller: 'NewRoomCtrl'
-  });  
-  
+  });
+
   $routeProvider.when('/rooms/:roomId', {
     templateUrl: 'templates/room.html',
     controller: 'RoomCtrl'
   });
 
-  
+
   $routeProvider.when('/about', {
     templateUrl: 'templates/about.html',
     controller: 'AboutCtrl'
-  });    
-  
+  });
+
+  $routeProvider.when('/statistics', {
+    templateUrl: 'templates/statistics.html',
+    controller: 'StatisticsCtrl'
+  });
+
   $routeProvider.otherwise({
     redirectTo: '/home'
   });
 
 });
-

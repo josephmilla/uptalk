@@ -6,6 +6,10 @@ angular.module('chatRoom.controllers', [])
     $scope.toggleSideMenu();
   };
 
+  $scope.goToNewRoomPlus = function() {
+    $location.path('/rooms/new');
+  }
+
   $scope.goToAbout = function() {
     $location.path('/about');
     $scope.toggleSideMenu();
@@ -13,6 +17,11 @@ angular.module('chatRoom.controllers', [])
 
   $scope.goToHome = function() {
     $location.path('/home');
+    $scope.toggleSideMenu();
+  };
+
+  $scope.goToStatistics = function() {
+    $location.path('/statistics');
     $scope.toggleSideMenu();
   };
 
@@ -86,6 +95,15 @@ angular.module('chatRoom.controllers', [])
       $scope.$broadcast('scroll.refreshComplete');
     }, 500);
   };
+})
+
+.controller('StatisticsCtrl', function($scope) {
+
+  // $scope.onRefresh = function() {
+  //   var stop = $timeout(function() {
+  //     $scope.$broadcast('scroll.refreshComplete');
+  //   }, 500);
+  // };
 })
 
 .controller('AboutCtrl', function($scope) {
