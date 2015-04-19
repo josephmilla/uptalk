@@ -7,18 +7,18 @@ var bodyParser = require('body-parser');
 
 var history = [
 	{
-		"original" : ["Hey!",       , "I'm great. Thanks for asking!", "I do, but eat it rarely. What kind do you like?"],
+		"original" : ["Hey!"        , "I'm great. Thanks for asking!", "I do, but eat it rarely. What kind do you like?"],
 		"real"     : ["How are you?", "Do you like candy?"           , "My favorite is Laffy Laffy."],
 		"1"        : ["Fake"        , "Fake"                         , "Fake"],
 		"2"        : ["Even Faker"  , "More Fake"                    , "Fakeish"],
 	},{
-		"original" : ["Two!",       , "I'm great. Two for asking!"   , "I do, but two it rarely. What kind do you like?"],
-		"real"     : ["Two are you?", "Do you like two?",            , "My favorite is Two Two."],
+		"original" : ["Two!"        , "I'm great. Two for asking!"   , "I do, but two it rarely. What kind do you like?"],
+		"real"     : ["Two are you?", "Do you like two?"             , "My favorite is Two Two."],
 		"1"        : ["Fake"        , "Fake"                         , "Fake"],
 		"2"        : ["Even Faker"  , "More Fake"                    , "Fakeish"],
 	},{
-		"original" : ["Extra!",     , "I'm great. Extra for asking!" , "I do, but eat extra rarely. What kind do you like?"],
-		"real"     : ["Extra you?"  , "Do you like extra?",          , "My favorite is Extra Extra."],
+		"original" : ["Extra!"      , "I'm great. Extra for asking!" , "I do, but eat extra rarely. What kind do you like?"],
+		"real"     : ["Extra you?"  , "Do you like extra?"           , "My favorite is Extra Extra."],
 		"1"        : ["Fake"        , "Fake"                         , "Fake"],
 		"2"        : ["Even Faker"  , "More Fake"                    , "Fakeish"],
 	},
