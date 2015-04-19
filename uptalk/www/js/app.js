@@ -49,11 +49,7 @@ angular.module('chatRoom', ['ionic', 'ngRoute', 'ngAnimate', 'chatRoom.services'
     templateUrl: 'templates/chatstats2.html',
     controller: 'ChatStats2Ctrl'
   });
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 1942ca04eef2e95186ce532843adcc2623091119
   $routeProvider.otherwise({
     redirectTo: '/home'
   });
